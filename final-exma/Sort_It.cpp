@@ -1,0 +1,42 @@
+#include <iostream>
+#include <algorithm>
+#include <string>
+
+using namespace std;
+
+class Student {
+public:
+    string nm;
+    int cls;
+    char s;
+    int id;
+    int math_marks;
+    int eng_marks;
+    int total_marks;
+};
+
+bool cmp(Student a,Student b) {
+    if (a.total_marks == b.total_marks) {
+        return a.id < b.id;
+    }
+    return a.total_marks > b.total_marks;
+}
+
+int main() {
+    int N;
+    cin >> N;
+
+    Student students[100];
+    for (int i = 0; i < N; i++) {
+        cin >> students[i].nm >> students[i].cls >> students[i].s >> students[i].id >> students[i].math_marks >> students[i].eng_marks;
+        students[i].total_marks = students[i].math_marks + students[i].eng_marks;
+    }
+
+    sort(students, students + N, cmp);
+
+    for (int i = 0; i < N; i++) {
+        cout << students[i].nm << " " << students[i].cls << " " << students[i].s << " " << students[i].id << " " << students[i].math_marks << " " << students[i].eng_marks << endl;
+    }
+
+    return 0;
+}
